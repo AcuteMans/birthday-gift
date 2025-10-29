@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANIME WATCH LIST ORDERED!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #fff;
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            padding: 40px 10px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== Background Characters ===== */
+        .background-character {
+            position: absolute;
+            width: 45%;
+            height: auto;
+            opacity: 0.18;
+            z-index: 0;
+            pointer-events: none;
+            filter: brightness(1.2) blur(1px);
+            transition: opacity 1.5s ease;
+        }
+
+        .gojo {
+            top: 0;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .eren {
+            top: 0;
+            right: -60px;
+        }
+
+        .parasyte {
+            top: 180vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .sukuna {
+            top: 145vh;
+            right: -60px;
+        }
+
+        /* ===== Page Layout ===== */
+        h1 {
+            font-size: 2.5rem;
+            color: #ffb6c1;
+            margin-bottom: 40px;
+            text-shadow: 0 0 15px rgba(255, 182, 193, 0.7);
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .anime {
+            position: relative;
+            z-index: 1;
+            margin: 25px auto;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .anime:hover {
+                transform: scale(1.02);
+                box-shadow: 0 0 25px rgba(255, 182, 193, 0.3);
+            }
+
+        .anime-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ff90b3;
+            margin-bottom: 12px;
+        }
+
+        .number {
+            color: #ffd1dc;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        .anime img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.1);
+        }
+
+        .watch-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background-color: #ff90b3;
+            color: #0d0d0d;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+            .watch-btn:hover {
+                background-color: #ffd1dc;
+                transform: scale(1.05);
+            }
+
+        /* Fade-in animation */
+        .anime {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+            .anime:nth-child(n) {
+                animation-delay: calc(0.08s * var(--i));
+            }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Back Button (Top Left Corner) ===== */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ff90b3;
+            color: #0d0d0d;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 10px 18px;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            z-index: 10;
+        }
+
+            .back-btn:hover {
+                background-color: #ffd1dc;
+                transform: scale(1.05);
+            }
+    </style>
+</head>
+<body>
+
+    <!-- 🔙 Return Button -->
+    <a href="javascript:void(0)" class="back-btn" onclick="goBack()">🎁 Back</a>
+
+    <!-- Background Characters -->
+    <img src="gojo left.jpg" alt="Gojo background" class="background-character gojo">
+    <img src="eren right side.jpg" alt="Eren background" class="background-character eren">
+    <img src="left side parasyte.jpg" alt="Parasyte background" class="background-character parasyte">
+    <img src="sukuna rightside.jpg" alt="Sukuna background" class="background-character sukuna">
+
+    <h1>📺 ANIME WATCH LIST ORDERED!</h1>
+
+    <div id="anime-container"></div>
+
+    <script>
+        /* ===== Smart Back Button Function ===== */
+        function goBack() {
+            if (document.referrer.includes('present.html')) {
+                history.back(); // ✅ Return to previous page in same state
+            } else {
+                window.location.href = 'present.html#your-first-present'; // 🔁 Fallback if opened directly
+            }
+        }
+
+        /* ===== Anime List ===== */
+        const animeList = [
+            { title: "FRIEREN", img: "frieren poster.jpg", link: "https://youtu.be/Iwr1aLEDpe4" },
+            { title: "KAIJUU NO 8", img: "KAIJUU NO 8.jpg", link: "https://youtu.be/JwF7bhvnCxI" },
+            { title: "REZERO", img: "rezerp poster.jpg", link: "https://youtu.be/Slz_rahWp6Y" },
+            { title: "LINK CLICK", img: "LINK CLICK poster.jpg", link: "https://youtu.be/HxoR_7jVBCM" },
+            { title: "APOTHECARY DIARIES", img: "APOTHECARY DIARIES poster.jpg", link: "https://youtu.be/XYNGkSvFT8c" },
+            { title: "OUSAMA RANKING", img: "OUSAMA RANKING poster.jpg", link: "https://youtu.be/o0JUj3yPNpc" },
+            { title: "HEAVENLY DELUSION", img: "HEAVENLY DELUSION poster.jpg", link: "https://youtu.be/S-TaIas2SHw" },
+            { title: "OWARI NO SERAPH", img: "OWARI NO SERAPH poster.jpg", link: "https://youtu.be/NtzDAmRhD9s" },
+            { title: "MUSHOKOU TENSEI", img: "MUSHOKOU TENSEI poster.jpg", link: "https://youtu.be/k5VxfJpzy1Q" },
+            { title: "CLANNAD", img: "CLANNAD poster.jpg", link: "https://youtu.be/9ZseZTshl2k" },
+            { title: "ANOHANA", img: "ANOHANA poster.jpg", link: "https://youtu.be/x8fvwC5xVGg" },
+            { title: "MOB PSYCHO", img: "MOB PSYCHO poster.jpg", link: "https://youtu.be/nTze7vAdRpM" },
+            { title: "BOCCHI THE ROCK", img: "BOCCHI THE ROCK poster.jpg", link: "https://youtu.be/SyMMZF5zNW4" },
+            { title: "EMINENCE IN SHADOW", img: "EMINENCE IN SHADOW poster.jpg", link: "https://youtu.be/L7LgAbGF-WY" },
+            { title: "MADE IN ABYSS", img: "MADE IN ABYSS poster.jpg", link: "https://youtu.be/kqBNQEUI8dM" },
+            { title: "EVANGELION", img: "EVANGELION poster.jpg", link: "https://youtu.be/13nSISwxrY4" },
+            { title: "EIGHTY SIX", img: "EIGHTY SIX poster.jpg", link: "https://youtu.be/Mb5ESlC3FNc" },
+            { title: "COWBOY BEBOP", img: "COWBOY BEBOP poster.jpg", link: "https://youtu.be/OhNwckCLzis" },
+            { title: "HUNTER X HUNTER", img: "HUNTER X HUNTER poster.jpg", link: "https://youtu.be/80ag_r-g928" },
+            { title: "JOJO", img: "JOJO poster.jpg", link: "https://youtu.be/DT0yV2ZYrBQ" },
+            { title: "ONE PIECE", img: "ONE PIECE poster.jpg", link: "https://youtu.be/Ades3pQbeh8" }
+        ];
+
+        const container = document.getElementById('anime-container');
+
+        animeList.forEach((anime, i) => {
+            const div = document.createElement('div');
+            div.classList.add('anime');
+            div.style.setProperty('--i', i + 1);
+            div.innerHTML = `
+                    <div class="anime-title">
+                        <span class="number">${String(i + 1).padStart(2, '0')}.</span> ${anime.title}
+                    </div>
+                    <img src="${anime.img}" alt="${anime.title} poster">
+                    <a href="${anime.link}" class="watch-btn" target="_blank">🎥 Watch Trailer</a>
+                `;
+            container.appendChild(div);
+        });
+    </script>
+</body>
+</html>

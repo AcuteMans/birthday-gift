@@ -1,0 +1,948 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Birthday Matoviya</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Handlee&display=swap" rel="stylesheet">
+
+
+    <style>
+        :root {
+            --pink-1: #ffafcc;
+            --pink-2: #ffc8dd;
+            --lav: #cdb4db;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Comic Neue", cursive, system-ui, -apple-system, "Segoe UI", Roboto;
+            background: linear-gradient(to bottom, #fff8f0 0%, #bde0fe 45%, #ffc8dd 100%);
+            overflow-x: hidden;
+        }
+
+        .creature {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            z-index: 5;
+            filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15)); /* 🌊 soft shadow under creatures */
+            animation: floatBob 5s ease-in-out infinite; /* gentle floating animation */
+        }
+
+        /* Title Button Row */
+        .title-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+            .title-bar img {
+                width: 180px;
+                height: 180px;
+                object-fit: cover;
+                border-radius: 16px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+        #titleBtn {
+            font-family: "Pacifico", cursive;
+            font-size: 3.2rem;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ffafcc, #ffc8dd, #bde0fe);
+            -webkit-background-clip: 
+text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 8px rgba(255, 175, 204, 0.25);
+            cursor: pointer;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            user-select: none;
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 30px;
+            position: relative;
+        }
+
+            #titleBtn::after {
+                content: "";
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 100%;
+                height: 6px;
+                border-radius: 50%;
+                background: radial-gradient(ellipse at center, rgba(255,182,193,0.5), transparent 70%);
+                filter: blur(8px);
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+
+            #titleBtn:hover {
+                transform: scale(1.05);
+                text-shadow: 0 4px 1px rgba(255, 182, 193, 0.6);
+            }
+
+                #titleBtn:hover::after {
+                    opacity: 1;
+                }
+
+
+            #titleBtn:hover {
+                transform: scale(1.03);
+                background: #ffe5ec;
+            }
+
+        .river-container {
+            position: relative;
+            width: 100%;
+            max-height: 720px;
+            height: 48vh;
+            min-height: 360px;
+            overflow: hidden;
+            margin-top: -40px; /* was 10px */
+            transition: clip-path 1.2s ease;
+            clip-path: inset(0 100% 0 0);
+        }
+
+            .river-container.active {
+                clip-path: inset(0 0 0 0);
+            }
+
+        .river {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200%;
+            height: 100%;
+            pointer-events: none;
+        }
+            .river::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -50%;
+                width: 200%;
+                height: 100%;
+                background: linear-gradient( 120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.3) 60%, rgba(255, 255, 255, 0) 100% );
+                animation: shimmer 6s linear infinite;
+                pointer-events: none;
+                mix-blend-mode: soft-light;
+            }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(50%);
+            }
+        }
+            .river.top {
+                animation: waveTop 24s linear infinite;
+                opacity: .96;
+                filter: drop-shadow(0 0 12px #a2d2ff);
+            }
+
+            .river.bottom {
+                animation: waveBottom 36s linear infinite reverse;
+                opacity: .78;
+            }
+
+            /* ✨ Shimmer gradient effect across the river */
+            .river::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -50%;
+                width: 200%;
+                height: 100%;
+                background: linear-gradient( 120deg, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0.15) 75% );
+                animation: shimmerMove 6s linear infinite;
+                mix-blend-mode: screen;
+                opacity: 0.5;
+                pointer-events: none;
+            }
+
+        @keyframes shimmerMove {
+            from {
+                transform: translateX(-25%);
+            }
+
+            to {
+                transform: translateX(25%);
+            }
+        }
+
+        @keyframes waveTop {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes waveBottom {
+            from {
+                transform: translateX(-50%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        #boat {
+            position: absolute;
+            width: 96px;
+            z-index: 20;
+            left: -15%;
+            top: 60%;
+            transition: left 5s cubic-bezier(.2,.9,.2,1), top 5s cubic-bezier(.2,.9,.2,1), opacity .6s ease;
+            will-change: left, top;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.2));
+            opacity: 0;
+            pointer-events: none;
+        }
+
+      
+
+
+
+        @keyframes bob {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .boat-bob {
+            animation: bob 3s ease-in-out infinite;
+        }
+
+        /* subtle boat wake */
+        #boatWake {
+            position: absolute;
+            width: 120px;
+            height: 80px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, rgba(173,216,230,0.15) 70%, transparent 100%);
+            border-radius: 50%;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
+            animation: wakeRipple 3s ease-out infinite;
+            filter: blur(4px);
+        }
+
+        @keyframes wakeRipple {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.4;
+            }
+
+            70% {
+                transform: scale(1.3);
+                opacity: 0.2;
+            }
+
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        /* CHIBI RIPPLE style */
+        .ripple {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 8;
+            transform: translate(-50%,-50%);
+            background: radial-gradient(circle at center, rgba(255,255,255,0.85) 0%, rgba(255,230,245,0.7) 25%, rgba(173,216,230,0.35) 55%, rgba(173,216,230,0.08) 75%, transparent 100%);
+            filter: blur(0.8px) saturate(1.05);
+            animation: chibiRipple 1.6s cubic-bezier(.2,.9,.25,1) forwards;
+        }
+
+        @keyframes chibiRipple {
+            0% {
+                transform: translate(-50%,-50%) scale(0.35);
+                opacity: 0.85;
+            }
+
+            30% {
+                transform: translate(-50%,-50%) scale(1.05);
+                opacity: 0.6;
+            }
+
+            70% {
+                transform: translate(-50%,-50%) scale(1.7);
+                opacity: 0.25;
+            }
+
+            100% {
+                transform: translate(-50%,-50%) scale(2.3);
+                opacity: 0;
+            }
+        }
+
+        /* ✨ Gentle floating motion for creatures */
+        @keyframes floatBob {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Destinations + UI */
+        .destination {
+            position: absolute;
+            transform: translateY(-50%);
+            background: rgba(255,200,221,0.92);
+            border: 3px solid var(--pink-1);
+            border-radius: 18px;
+            padding: 8px 12px;
+            font-size: 14px;
+            box-shadow: 2px 6px 18px rgba(255,175,204,0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 6;
+            opacity: 0;
+            transition: opacity .9s ease, transform .6s ease;
+            white-space: nowrap;
+        }
+
+            .destination img {
+                width: 102px;
+                height: 82px;
+                object-fit: contain;
+                display: block;
+                margin-bottom: 6px;
+            }
+
+            .destination.unlocked {
+                opacity: 1;
+                transform: scale(1.05) translateY(-4px);
+            }
+
+        /* Collage */
+        /* Center buttons + text under river */
+        .controls-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            margin-top: 20px;
+        }
+
+
+        /* Collage */
+        .collage-wrap {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 25px;
+            width: 95%;
+            max-width: 1400px;
+            height: 240px;
+            pointer-events: none;
+            z-index: 9;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 70px; /* ✨ more space between each image */
+            padding: 20px 60px; /* extra breathing room */
+            transition: opacity .9s ease, transform .6s ease;
+            opacity: 0;
+        }
+
+            .collage-wrap.show {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateX(-50%) translateY(0);
+            }
+
+        .polaroid {
+            width: 200px;
+            height: 180px;
+            background: #fff;
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform-origin: center;
+            transition: transform .6s cubic-bezier(.2,.9,.2,1), opacity .8s;
+            opacity: 0;
+        }
+
+            .polaroid img {
+                width: 150%;
+                height: 150%;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+        @media(max-width: 720px) {
+            .collage-wrap {
+                gap: 30px;
+                padding: 10px 30px;
+                height: 180px;
+            }
+
+            .polaroid {
+                width: 140px;
+                height: 130px;
+            }
+        }
+
+        @keyframes gentleBounce {
+            0% {
+                transform: scale(0.9) translateY(40px) rotate(var(--tilt));
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.05) translateY(-6px) rotate(var(--tilt));
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) translateY(0) rotate(var(--tilt));
+                opacity: 1;
+            }
+        }
+
+        .message-box {
+            display: inline-block;
+            min-width: 280px;
+            max-width: 720px;
+            background: linear-gradient(180deg,#fff,#ffeef7);
+            border-radius: 14px;
+            border: 2px solid #ffdbeb;
+            padding: 12px 18px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+            margin-bottom: 12px;
+            opacity: 1;
+            transition: opacity .5s ease;
+            color: #4b3840;
+            font-size: 1rem;
+        }
+
+        .message-fade {
+            opacity: 0;
+            transition: opacity .4s ease;
+        }
+
+        .buttons {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+            .buttons.visible {
+                opacity: 1;
+            }
+
+        button {
+            background: var(--lav);
+            border: none;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 14px;
+            margin: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+            transition: transform .15s ease, background .2s;
+        }
+
+            button:hover {
+                transform: translateY(-3px);
+                background: var(--pink-1);
+            }
+
+        #revealBtn {
+            background: #b9939b;
+        }
+
+        /* Music controls */
+        .music-controls {
+            position: fixed;
+            right: 20px;
+            bottom: 18px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 12px;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            opacity: 0;
+            transition: opacity .7s ease;
+            z-index: 30;
+        }
+
+            .music-controls.visible {
+                opacity: 1;
+            }
+
+        #volumeControl {
+            width: 110px;
+            cursor: pointer;
+        }
+
+        /* Scroll container and poem */
+        .scroll-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%) scaleX(0);
+            width: 78%;
+            max-width: 920px;
+            height: 360px;
+            border-radius: 10px;
+            overflow-y: auto; /* ✅ make it scrollable vertically */
+            overflow-x: hidden;
+            z-index: 50;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+            background: linear-gradient(180deg,#f7efe0 0%,#efe0c9 100%);
+            border: 6px solid rgba(212,163,115,0.85);
+            padding: 20px;
+            transform-origin: center left;
+            scrollbar-width: thin; /* nicer scroll on Firefox */
+            scrollbar-color: rgba(0,0,0,0.2) transparent;
+        }
+
+            /* optional: prettier scrollbar for Chrome/Edge */
+            .scroll-container::-webkit-scrollbar {
+                width: 8px;
+            }
+
+
+
+
+            .scroll-container.scroll-unroll {
+                animation: unroll 1.3s ease forwards;
+            }
+
+        @keyframes unroll {
+            from {
+                transform: translate(-50%,-50%) scaleX(0);
+            }
+
+            to {
+                transform: translate(-50%,-50%) scaleX(1);
+            }
+        }
+
+        .poem {
+            opacity: 0;
+            color: #4b3832;
+            font-family: Georgia,"Times New Roman",serif;
+            font-size: 18px;
+            line-height: 1.45;
+            text-align: center;
+            white-space: pre-line;
+            padding: 12px 28px;
+            transition: opacity 1.4s ease;
+        }
+
+            .poem.visible {
+                opacity: 1;
+            }
+
+        /* Collage */
+        .collage-wrap {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 10px;
+            width: 92%;
+            max-width: 1100px;
+            height: 160px;
+            pointer-events: none;
+            z-index: 9;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            gap: 14px;
+            padding: 12px 20px;
+            transition: opacity .9s ease, transform .6s ease;
+            opacity: 0;
+        }
+
+            .collage-wrap.show {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateX(-50%) translateY(0);
+            }
+
+        .polaroid {
+            width: 130px;
+            height: 130px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+            transform-origin: center;
+            transition: transform .6s cubic-bezier(.2,.9,.2,1), opacity .8s;
+            opacity: 0;
+        }
+
+        #poemTitle {
+            font-family: "Pacifico", cursive;
+            font-size: 2.6rem;
+            text-align: center;
+            color: #b76e79;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+            background: linear-gradient(90deg, #ffafcc, #ffc8dd, #bde0fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 3px 10px rgba(255, 200, 220, 0.3);
+        }
+
+            #poemTitle.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .polaroid img {
+                width: 140%;
+                height: 140%;
+                object-fit: cover;
+                border-radius: 6px;
+            }
+
+        @media(max-width:720px) {
+            .polaroid {
+                width: 124px;
+                height: 140px;
+            }
+
+            #boat {
+                width: 76px;
+            }
+
+            .destination img {
+                width: 56px;
+                height: 48px;
+            }
+
+            .collage-wrap {
+                height: 130px;
+            }
+        }
+
+        @keyframes gentleBounce {
+            0% {
+                transform: scale(0.9) translateY(40px) rotate(var(--tilt));
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.05) translateY(-6px) rotate(var(--tilt));
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) translateY(0) rotate(var(--tilt));
+                opacity: 1;
+            }
+        }
+
+        /* ✨ After appearing, gentle floating movement */
+        @keyframes gentleFloat {
+            0% {
+                transform: translateY(0) rotate(var(--tilt));
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(var(--tilt));
+            }
+
+            100% {
+                transform: translateY(0) rotate(var(--tilt));
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🎂 Title Section -->
+    <div class="title-bar">
+        <img src="sasha happy birthday.jpg" alt="Sasha Happy Birthday">
+        <div id="titleBtn">HAPPY BIRTHDAY MATOVIYA</div>
+        <img src="happy birthday yuji.jpg" alt="Yuji Happy Birthday">
+    </div>
+
+    <!-- 🌊 River + Boat + Destinations -->
+    <div class="river-container" id="riverContainer">
+        <svg class="river top" viewBox="0 0 1800 480" preserveAspectRatio="none">
+            <path fill="#a2d2ff" d="M0,260 C300,160 600,360 900,260 C1200,160 1500,360 1800,260 L1800,480 L0,480 Z"></path>
+        </svg>
+        <svg class="river bottom" viewBox="0 0 1800 480" preserveAspectRatio="none">
+            <path fill="#89c2f8" d="M0,260 C300,360 600,160 900,360 C1200,460 1500,260 1800,360 L1800,480 L0,480 Z"></path>
+        </svg>
+
+        <img class="creature" src="fish.png" style="left:18%;top:68%;transform:rotate(-6deg);animation-duration:4.6s;">
+        <img class="creature" src="jellyfish.png" style="left:42%;top:74%;transform:rotate(6deg);animation-duration:6.2s;">
+        <img class="creature" src="otter.png" style="left:74%;top:64%;transform:rotate(-3deg);animation-duration:5.4s;">
+
+        <div id="boatWake"></div>
+        <img id="boat" src="boat.png" alt="boat">
+
+        <div class="destination" data-name="Harbour" style="left:5%;top:62%;"><img src="docks.png"><span>Harbour</span></div>
+        <div class="destination" data-name="Boba Docks" style="left:20%;top:42%;"><img src="boba.png"><span>Boba Docks</span></div>
+        <div class="destination" data-name="Bowling Bay" style="left:35%;top:66%;"><img src="bowling.png"><span>Bowling Bay</span></div>
+        <div class="destination" data-name="Korean Cove" style="left:50%;top:40%;"><img src="korean.png"><span>Korean Cove</span></div>
+        <div class="destination" data-name="Chilling Shores" style="left:65%;top:60%;"><img src="chilling shores.png"><span>Chilling Shores</span></div>
+        <div class="destination" data-name="Anime Lagoon" style="left:80%;top:44%;"><img src="anime lagoon.png"><span>Anime Lagoon</span></div>
+        <div class="destination" data-name="The One Piece" style="left:92%;top:54%;"><img id="chest" src="one piece.png"><span>The One Piece</span></div>
+    </div>
+
+    <!-- 🧭 Controls -->
+    <div class="controls-wrap">
+        <div id="messageBox" class="message-box">A journey lies ahead — do you want to take it?</div>
+        <div class="buttons" id="buttons">
+            <button id="nextBtn">Start Journey</button>
+            <button id="openGiftBtn" style="display:none;">Your First Present 🎁</button>
+            <button id="revealBtn" style="display:none;">Reveal Treasure 💌</button>
+            <button id="resetBtn" style="background:#bde0fe;">Reset Trip 🔁</button>
+        </div>
+    </div>
+
+    <!-- 🎵 Music -->
+    <div class="music-controls" id="musicControls">
+        <button id="musicToggle">🎵 On/Off</button>
+        <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.1">
+    </div>
+
+    <!-- 📜 Scroll + Poem -->
+    <div class="scroll-container" id="scrollContainer">
+        <h2 id="poemTitle">I'm falling for you, Tovy 💗</h2>
+        <div class="poem" id="poem">
+            Fell for you once — and thought that was all,<br>
+            But each passing day, I trip and I fall.<br>
+            Not clumsy or careless, not lost in the blue,<br>
+            Just endlessly tumbling deeper in you.<br>
+            Your laugh pulls me closer, your eyes make me stay,<br>
+            I find something new to love every day.<br>
+            It’s sweet and it’s scary, yet perfectly true —<br>
+            I’ll keep on falling, forever, for you.
+        </div>
+    </div>
+
+    <!-- 📸 Collage -->
+    <div class="collage-wrap" id="collageWrap"></div>
+
+    <!-- 🎧 Audio -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="KAYTRANADA - What You Need (Audio) ft. Charlotte Day Wilson.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 🌟 JS Script -->
+    <script>
+        const collageFiles = [
+            "beast boy raven.jpg", "howls.jpg", "cat.jpg", "dandadan.jpg",
+            "cute.jpg", "monster.jpg", "deadpool.jpg", "vegeta.jpg",
+            "spiderman.jpg", "shot cute.jpg",
+            "hello kitty spidey.jpg", "cute eat.jpg"
+        ];
+
+        const messages = [
+            "A journey lies ahead — do you want to take it?",
+            "A cute start to our talks 💬",
+            "Our mock date and our awkward moments around the mall 🧋",
+            "Our first official date where I swindled you and your cute frustrated expressions made it so worth it 🎳",
+            "New tastes and lots of laughter shared with my favourite person 🍜",
+            "Getting me on The Rookie, Hooked on Love Island Games and taking naps are a deadly combination 🌴",
+            "Your first gift is here! 🎁",
+            "An amazing girl deserves a present that matches the energy 💖"
+        ];
+
+        const titleBtn = document.getElementById("titleBtn");
+        const riverContainer = document.getElementById("riverContainer");
+        const boat = document.getElementById("boat");
+        const boatWake = document.getElementById("boatWake");
+        const destinations = Array.from(document.querySelectorAll(".destination"));
+        const buttonsWrap = document.getElementById("buttons");
+        const nextBtn = document.getElementById("nextBtn");
+        const revealBtn = document.getElementById("revealBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const messageBox = document.getElementById("messageBox");
+        const openGiftBtn = document.getElementById("openGiftBtn");
+        const musicControls = document.getElementById("musicControls");
+        const bgMusic = document.getElementById("bgMusic");
+        const volumeControl = document.getElementById("volumeControl");
+        const musicToggle = document.getElementById("musicToggle");
+        const scrollContainer = document.getElementById("scrollContainer");
+        const poem = document.getElementById("poem");
+        const collageWrap = document.getElementById("collageWrap");
+        const chest = document.getElementById("chest");
+
+        let currentIndex = -1;
+        let isStarted = false;
+
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+        function fadeMessage(text) {
+            messageBox.classList.add("message-fade");
+            setTimeout(() => {
+                messageBox.textContent = text;
+                messageBox.classList.remove("message-fade");
+            }, 350);
+        }
+
+        function createChibiRipplesAt(px, py, count = 3) {
+            for (let i = 0; i < count; i++) {
+                const r = document.createElement("div");
+                r.className = "ripple";
+                const ox = (Math.random() * 36) - 18;
+                const oy = (Math.random() * 24) - 10;
+                r.style.left = (px + ox) + "px";
+                r.style.top = (py + oy) + "px";
+                r.style.animationDelay = (i * 0.12) + "s";
+                riverContainer.appendChild(r);
+                setTimeout(() => r.remove(), 1800 + (i * 120));
+            }
+        }
+
+        function moveBoatToDestination(destEl) {
+            return new Promise(resolve => {
+                boat.style.transition = "left 3s cubic-bezier(.2,.9,.2,1), top 3s cubic-bezier(.2,.9,.2,1)";
+                boatWake.style.transition = "left 3s cubic-bezier(.2,.9,.2,1), top 3s cubic-bezier(.2,.9,.2,1)";
+                const left = destEl.style.left;
+                const top = destEl.style.top;
+                boat.style.left = left;
+                boat.style.top = top;
+                boatWake.style.left = left;
+                const topPercent = parseFloat(top) || 60;
+                boatWake.style.top = (topPercent + 4) + "%";
+                boatWake.style.opacity = 0.35;
+                const riverRect = riverContainer.getBoundingClientRect();
+                const rippleInterval = setInterval(() => {
+                    const boatRect = boat.getBoundingClientRect();
+                    const centerX = boatRect.left + boatRect.width / 2 - riverRect.left;
+                    const centerY = boatRect.top + boatRect.height * 0.9 - riverRect.top;
+                    createChibiRipplesAt(centerX, centerY, 2);
+                }, 300);
+                setTimeout(() => {
+                    clearInterval(rippleInterval);
+                    const boatRect = boat.getBoundingClientRect();
+                    const centerX = boatRect.left + boatRect.width / 2 - riverRect.left;
+                    const centerY = boatRect.top + boatRect.height * 0.9 - riverRect.top;
+                    createChibiRipplesAt(centerX, centerY, 4);
+                    setTimeout(() => { boatWake.style.opacity = 0.12; }, 600);
+                    resolve();
+                }, 3000);
+            });
+        }
+
+        function populateCollage() {
+            collageFiles.forEach((f, i) => {
+                const p = document.createElement("div");
+                p.className = "polaroid";
+                const img = document.createElement("img");
+                img.src = f;
+                p.appendChild(img);
+                collageWrap.appendChild(p);
+                const randomTilt = (Math.random() * 20 - 10).toFixed(2);
+                p.style.setProperty("--tilt", randomTilt + "deg");
+                setTimeout(() => p.style.animation = "gentleBounce 1s ease-out forwards", 250 * i + 200);
+            });
+        }
+
+        titleBtn.addEventListener("click", async () => {
+            if (isStarted) return;
+            isStarted = true;
+            riverContainer.classList.add("active");
+            boat.style.opacity = "1";
+            boat.classList.add("boat-bob");
+            boatWake.style.opacity = "0.3";
+            boat.style.left = "-15%";
+            boat.style.top = "60%";
+            boatWake.style.left = "-17%";
+            boatWake.style.top = "63%";
+            setTimeout(() => {
+                buttonsWrap.classList.add("visible");
+                musicControls.classList.add("visible");
+                collageWrap.classList.add("show");
+            }, 500);
+            bgMusic.volume = parseFloat(volumeControl.value || 0.1);
+            bgMusic.play().catch(() => { });
+            populateCollage();
+            fadeMessage(messages[1]);
+        });
+
+        nextBtn.addEventListener("click", async () => {
+            nextBtn.disabled = true;
+            currentIndex = currentIndex === -1 ? 0 : currentIndex + 1;
+            if (currentIndex < destinations.length) {
+                const destEl = destinations[currentIndex];
+                fadeMessage(messages[Math.min(currentIndex + 1, messages.length - 1)]);
+                destEl.classList.add("unlocked");
+                await moveBoatToDestination(destEl);
+            }
+            const name = destinations[Math.min(currentIndex, destinations.length - 1)].dataset.name || "";
+            if (name === "Anime Lagoon") {
+                openGiftBtn.style.display = "inline-block";
+                openGiftBtn.onclick = () => location.href = 'AnimeList.html';
+            }
+            if (name === "The One Piece") nextBtn.textContent = "Your Treasure";
+            if (nextBtn.textContent === "Your Treasure") {
+                nextBtn.style.display = "none";
+                revealBtn.style.display = "inline-block";
+            } else nextBtn.disabled = false;
+        });
+
+        const poemTitle = document.getElementById("poemTitle");
+
+        revealBtn.addEventListener("click", async () => {
+            scrollContainer.classList.add("scroll-unroll");
+            await sleep(800);
+            poemTitle.classList.add("visible"); // 🌸 show title
+            await sleep(600);
+            poem.classList.add("visible");
+        });
+
+        resetBtn.addEventListener("click", () => location.reload());
+        volumeControl.addEventListener("input", () => bgMusic.volume = parseFloat(volumeControl.value));
+        musicToggle.addEventListener("click", () => bgMusic.paused ? bgMusic.play() : bgMusic.pause());
+        openGiftBtn.addEventListener("click", () => fadeMessage("Your first gift is here! 🎁"));
+    </script>
+
+</body>
+</html>
