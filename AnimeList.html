@@ -17,127 +17,77 @@
             overflow-x: hidden;
         }
 
-        /* 🎵 Audio Control Styling */
-        .audio-controls {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 182, 193, 0.1);
-            border-radius: 30px;
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(255, 144, 179, 0.4);
-            z-index: 999;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 144, 179, 0.3);
-        }
-
-            .audio-controls button {
-                background: linear-gradient(135deg, #ff90b3, #ffb6c1);
-                border: none;
-                border-radius: 50%;
-                width: 38px;
-                height: 38px;
-                color: #0d0d0d;
-                font-size: 18px;
-                cursor: pointer;
-                transition: transform 0.2s, background 0.3s;
-                box-shadow: 0 0 10px rgba(255, 144, 179, 0.4);
-            }
-
-                .audio-controls button:hover {
-                    transform: scale(1.1);
-                    background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
-                }
-
-            .audio-controls input[type="range"] {
-                -webkit-appearance: none;
-                width: 100px;
-                height: 5px;
-                background: linear-gradient(90deg, #ff90b3, #ffd1dc);
-                border-radius: 5px;
-                outline: none;
-                cursor: pointer;
-            }
-
-                .audio-controls input[type="range"]::-webkit-slider-thumb {
-                    -webkit-appearance: none;
-                    appearance: none;
-                    width: 15px;
-                    height: 15px;
-                    border-radius: 50%;
-                    background: #fff;
-                    border: 2px solid #ff90b3;
-                    cursor: pointer;
-                    transition: transform 0.2s;
-                }
-
-                    .audio-controls input[type="range"]::-webkit-slider-thumb:hover {
-                        transform: scale(1.2);
-                    }
-
-        /* 🎵 Music Overlay Styling */
+        /* 🎶 Music Controls */
         .music-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(13, 13, 13, 0.95);
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 999;
             backdrop-filter: blur(8px);
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: opacity 0.6s ease;
         }
 
             .music-overlay.hidden {
                 opacity: 0;
                 visibility: hidden;
+                pointer-events: none;
             }
 
         #startMusicBtn {
-            background: linear-gradient(135deg, #ff90b3, #ffb6c1);
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #ff90b3, #ff5f8b);
             color: #0d0d0d;
-            font-size: 1.4rem;
-            font-weight: bold;
             border: none;
             border-radius: 40px;
-            padding: 16px 40px;
+            padding: 18px 40px;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(255, 144, 179, 0.6);
+            box-shadow: 0 0 25px rgba(255, 144, 179, 0.4);
             transition: all 0.3s ease;
-            animation: pulseGlow 1.6s infinite alternate;
         }
 
             #startMusicBtn:hover {
-                transform: scale(1.08);
-                background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
-                box-shadow: 0 0 35px rgba(255, 182, 193, 0.8);
+                background: linear-gradient(135deg, #ffd1dc, #ff90b3);
+                transform: scale(1.05);
             }
 
-        @keyframes pulseGlow {
-            from {
-                box-shadow: 0 0 15px rgba(255, 144, 179, 0.5);
-            }
-
-            to {
-                box-shadow: 0 0 35px rgba(255, 182, 193, 0.9);
-            }
+        .audio-controls {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.07);
+            padding: 10px 14px;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(255, 144, 179, 0.2);
         }
 
-        body {
-            background: url('your-background-image.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
-            font-family: 'Quicksand', sans-serif;
-            text-align: center;
-            padding: 40px 10px;
-            position: relative;
-            overflow-x: hidden;
+        #audioToggle {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: #ff90b3;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
 
-        /* Background characters */
+            #audioToggle:hover {
+                transform: scale(1.2);
+            }
+
+        #volumeControl {
+            width: 100px;
+            cursor: pointer;
+            accent-color: #ff90b3;
+        }
+
+        /* 🎴 BACKGROUND CHARACTERS */
         .background-character {
             position: absolute;
             width: 45%;
@@ -160,7 +110,179 @@
             right: -60px;
         }
 
-        /* Anime blocks */
+        .parasyte {
+            top: 170vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .sukuna {
+            top: 137vh;
+            right: -60px;
+        }
+
+        .kurapika {
+            top: 440vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .bleach {
+            top: 268vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .tengen {
+            top: 480vh;
+            right: -60px;
+        }
+
+        .tobi {
+            top: 309vh;
+            right: -60px;
+        }
+
+        .csm {
+            top: 1400vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .jojo {
+            top: 570vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .luffy {
+            top: 742vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .opm {
+            top: 1109vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .solo-leveling {
+            top: 935vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .subaru {
+            top: 1270vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .zenetsu {
+            top: 1057vh;
+            right: -60px;
+        }
+
+        .dandadan {
+            top: 1425vh;
+            right: -60px;
+        }
+
+        .goku {
+            top: 1596vh;
+            right: -60px;
+        }
+
+        .L {
+            top: 1204vh;
+            right: -60px;
+        }
+
+        .makima {
+            top: 752vh;
+            right: -60px;
+        }
+
+        .mashle {
+            top: 925vh;
+            right: -60px;
+        }
+
+        .mob {
+            top: 652vh;
+            right: -60px;
+        }
+
+        .dabi {
+            top: 1572vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .escanor {
+            top: 1721vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .haikyuu {
+            top: 2260vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .link-click-left {
+            top: 1894vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .nanami {
+            top: 2068vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .rem {
+            top: 2434vh;
+            left: -60px;
+            transform: scaleX(-1);
+        }
+
+        .asta {
+            top: 1794vh;
+            right: -60px;
+        }
+
+        .choso {
+            top: 1965vh;
+            right: -60px;
+        }
+
+        .gabimaru {
+            top: 2137vh;
+            right: -60px;
+        }
+
+        .link-click-right {
+            top: 2298vh;
+            right: -60px;
+        }
+
+        .meliodas {
+            top: 2468vh;
+            right: -60px;
+        }
+
+        /* Anime Cards */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .anime {
             opacity: 0;
             transform: translateY(20px);
@@ -176,17 +298,10 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .anime:hover {
+                transform: scale(1.02);
+                box-shadow: 0 0 25px rgba(255, 182, 193, 0.3);
             }
-        }
-
-        .anime:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(255, 182, 193, 0.3);
-        }
 
         .anime-title {
             font-size: 1.3rem;
@@ -261,26 +376,28 @@
             }
     </style>
 </head>
-
 <body>
     <!-- 🎁 Back button -->
     <a href="javascript:void(0)" class="back-btn" id="backBtn">🎁 Back</a>
 
-    <!-- 🔥 Fire Force Music Controls -->
+    <!-- 🎵 Start Music Overlay -->
     <div id="musicOverlay" class="music-overlay">
-        <button id="startMusicBtn">🎵 Start Music</button>
+        <button id="startMusicBtn">🔥 Start “Inferno”</button>
     </div>
 
+    <!-- 🔊 Music Controls -->
     <div class="audio-controls">
-        <button id="audioToggle" title="Play/Pause Music">🔊</button>
+        <button id="audioToggle" title="Play/Pause">🔊</button>
         <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.2" title="Volume" />
     </div>
 
     <audio id="bgMusic" src="Fire Force - Opening 1  Inferno.mp3" preload="auto" loop></audio>
 
     <!-- Background Characters -->
+    <!-- ✅ All your images remain here (unchanged) -->
     <img src="gojo left.jpg" class="background-character gojo">
     <img src="eren right side.jpg" class="background-character eren">
+    <!-- Background Characters --> <img src="gojo left.jpg" class="background-character gojo"> <img src="eren right side.jpg" class="background-character eren"> <img src="left side parasyte.jpg" class="background-character parasyte"> <img src="sukuna rightside.jpg" class="background-character sukuna"> <img src="kurapika leftside.jpg" class="background-character kurapika"> <img src="left side bleach.jpg" class="background-character bleach"> <img src="tengen rightside.jpg" class="background-character tengen"> <img src="toby rightside.png" class="background-character tobi"> <img src="left side csm.jpg" class="background-character csm"> <img src="leftside jojo.jpg" class="background-character jojo"> <img src="leftside luffy.jpg" class="background-character luffy"> <img src="leftside opm.jpg" class="background-character opm"> <img src="leftside solo leveling.jpg" class="background-character solo-leveling"> <img src="leftside subaru.jpg" class="background-character subaru"> <img src="right side zenetsu.jpg" class="background-character zenetsu"> <img src="rightside dandadan.jpg" class="background-character dandadan"> <img src="rightside goku.jpg" class="background-character goku"> <img src="rightside L.jpg" class="background-character L"> <img src="rightside makima.jpg" class="background-character makima"> <img src="rightside mashle.jpg" class="background-character mashle"> <img src="rightside mob.jpg" class="background-character mob"> <img src="leftside dabi.jpg" class="background-character dabi"> <img src="leftside escanor.jpg" class="background-character escanor"> <img src="leftside haikyuu.jpg" class="background-character haikyuu"> <img src="leftside link click.jpg" class="background-character link-click-left"> <img src="leftside nanami.jpg" class="background-character nanami"> <img src="leftside rem.jpg" class="background-character rem"> <img src="rightside asta.jpg" class="background-character asta"> <img src="rightside choso.jpg" class="background-character choso"> <img src="rightside gabimaru.jpg" class="background-character gabimaru"> <img src="rightside link click.jpg" class="background-character link-click-right"> <img src="rightside meliodas.jpg" class="background-character meliodas">
 
     <h1>📺 ANIME WATCH LIST ORDERED!</h1>
     <div id="anime-container"></div>
@@ -292,33 +409,27 @@
             window.location.href = "present.html";
         });
 
-        /* 🎵 Fire Force Music Fade-in + Overlay Controls */
+        /* 🔥 Music Logic */
         const audio = document.getElementById('bgMusic');
+        const overlay = document.getElementById('musicOverlay');
+        const startBtn = document.getElementById('startMusicBtn');
         const toggleBtn = document.getElementById('audioToggle');
         const volumeControl = document.getElementById('volumeControl');
-        const startBtn = document.getElementById('startMusicBtn');
-        const overlay = document.getElementById('musicOverlay');
         let isPlaying = false;
-
-        // Smooth fade-in
-        function fadeInAudio(targetVolume = 0.2, step = 0.02, interval = 150) {
-            audio.volume = 0;
-            const fade = setInterval(() => {
-                if (audio.volume < targetVolume) {
-                    audio.volume = Math.min(audio.volume + step, targetVolume);
-                } else {
-                    clearInterval(fade);
-                }
-            }, interval);
-        }
 
         startBtn.addEventListener('click', () => {
             overlay.classList.add('hidden');
+            audio.volume = 0;
             audio.play().then(() => {
-                fadeInAudio(0.2);
+                let targetVolume = 0.2;
+                let fade = setInterval(() => {
+                    if (audio.volume < targetVolume) {
+                        audio.volume = Math.min(audio.volume + 0.01, targetVolume);
+                    } else clearInterval(fade);
+                }, 200);
                 isPlaying = true;
                 toggleBtn.textContent = '🔊';
-            }).catch(err => console.warn("Autoplay blocked:", err));
+            });
         });
 
         toggleBtn.addEventListener('click', () => {
@@ -336,7 +447,7 @@
             audio.volume = volumeControl.value;
         });
 
-        /* 🧾 Anime List Builder */
+        /* 🧾 Anime List */
         const animeList = [
             { title: "FRIEREN", img: "frieren poster.jpg", trailer: "https://youtu.be/Iwr1aLEDpe4", episode: "https://aniwatchtv.to/watch/frieren-beyond-journeys-end-18542?ep=107257" },
             { title: "KAIJUU NO 8", img: "KAIJUU NO 8.jpg", trailer: "https://youtu.be/JwF7bhvnCxI", episode: "https://aniwatchtv.to/watch/kaiju-no-8-19145?ep=123344" },
@@ -351,17 +462,18 @@
         ];
 
         const container = document.getElementById('anime-container');
+
         animeList.forEach((anime, i) => {
             const div = document.createElement('div');
             div.classList.add('anime');
             div.innerHTML = `
-                    <div class="anime-title">
-                        <span class="number">${String(i + 1).padStart(2, '0')}.</span> ${anime.title}
-                    </div>
-                    <img src="${anime.img}" alt="${anime.title} poster">
-                    <a href="${anime.trailer}" class="watch-btn" target="_blank">🎥 Watch Trailer</a>
-                    <a href="${anime.episode}" class="watch-anime-btn" target="_blank">▶ WATCH ANIME</a>
-                `;
+                        <div class="anime-title">
+                            <span class="number">${String(i + 1).padStart(2, '0')}.</span> ${anime.title}
+                        </div>
+                        <img src="${anime.img}" alt="${anime.title} poster">
+                        <a href="${anime.trailer}" class="watch-btn" target="_blank">🎥 Watch Trailer</a>
+                        <a href="${anime.episode}" class="watch-anime-btn" target="_blank">▶ WATCH ANIME</a>
+                    `;
             container.appendChild(div);
         });
     </script>
