@@ -253,8 +253,7 @@
             box-shadow: 0 0 15px rgba(255, 182, 193, 0.1);
         }
 
-        .watch-btn,
-        .watch-anime-btn {
+        .watch-btn, .watch-anime-btn {
             display: inline-block;
             padding: 10px 18px;
             color: #0d0d0d;
@@ -306,9 +305,10 @@
     </style>
 </head>
 <body>
-    <a href="javascript:void(0)" class="back-btn" onclick="goBack()">🎁 Back</a>
+    <!-- 🎁 Back button with return flag -->
+    <a href="javascript:void(0)" class="back-btn" id="backBtn">🎁 Back</a>
 
-    <!-- Background Characters (unchanged) -->
+    <!-- Background Characters -->
     <img src="gojo left.jpg" class="background-character gojo">
     <img src="eren right side.jpg" class="background-character eren">
     <img src="left side parasyte.jpg" class="background-character parasyte">
@@ -346,13 +346,11 @@
     <div id="anime-container"></div>
 
     <script>
-        function goBack() {
-            if (document.referrer.includes('index.html')) {
-                history.back();
-            } else {
-                window.location.href = 'index.html#your-first-present';
-            }
-        }
+        
+        document.getElementById("backBtn").addEventListener("click", () => {
+            localStorage.setItem("returnFromAnime", "true");
+            window.location.href = "present.html";
+        });
 
         const animeList = [
             { title: "FRIEREN", img: "frieren poster.jpg", trailer: "https://youtu.be/Iwr1aLEDpe4", episode: "https://aniwatchtv.to/watch/frieren-beyond-journeys-end-18542?ep=107257" },
@@ -394,6 +392,8 @@
                 `;
             container.appendChild(div);
         });
+
+       
     </script>
 </body>
 </html>

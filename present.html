@@ -107,7 +107,7 @@ text;
             height: 48vh;
             min-height: 360px;
             overflow: hidden;
-            margin-top: -40px; /* was 10px */
+            margin-top: -40px; 
             transition: clip-path 1.2s ease;
             clip-path: inset(0 100% 0 0);
         }
@@ -376,8 +376,8 @@ text;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            gap: 70px; /* ✨ more space between each image */
-            padding: 20px 60px; /* extra breathing room */
+            gap: 70px; 
+            padding: 20px 60px; 
             transition: opacity .9s ease, transform .6s ease;
             opacity: 0;
         }
@@ -528,7 +528,7 @@ text;
             max-width: 920px;
             height: 360px;
             border-radius: 10px;
-            overflow-y: auto; /* ✅ make it scrollable vertically */
+            overflow-y: auto; 
             overflow-x: hidden;
             z-index: 50;
             box-shadow: 0 12px 40px rgba(0,0,0,0.25);
@@ -536,7 +536,7 @@ text;
             border: 6px solid rgba(212,163,115,0.85);
             padding: 20px;
             transform-origin: center left;
-            scrollbar-width: thin; /* nicer scroll on Firefox */
+            scrollbar-width: thin; 
             scrollbar-color: rgba(0,0,0,0.2) transparent;
         }
 
@@ -904,12 +904,16 @@ text;
             bgMusic.volume = parseFloat(volumeControl.value || 0.1);
             bgMusic.play().catch(() => { });
             populateCollage();
-            fadeMessage(messages[1]);
+            fadeMessage("Press Start Journey");
+
         });
 
         nextBtn.addEventListener("click", async () => {
             nextBtn.disabled = true;
             currentIndex = currentIndex === -1 ? 0 : currentIndex + 1;
+            if (currentIndex === 0) {
+                fadeMessage("A cute start to our talks 💬");
+            }
             if (currentIndex < destinations.length) {
                 const destEl = destinations[currentIndex];
                 fadeMessage(messages[Math.min(currentIndex + 1, messages.length - 1)]);
@@ -942,6 +946,42 @@ text;
         volumeControl.addEventListener("input", () => bgMusic.volume = parseFloat(volumeControl.value));
         musicToggle.addEventListener("click", () => bgMusic.paused ? bgMusic.play() : bgMusic.pause());
         openGiftBtn.addEventListener("click", () => fadeMessage("Your first gift is here! 🎁"));
+
+        window.addEventListener("DOMContentLoaded", async () => {
+            const returning = localStorage.getItem("returnFromAnime");
+
+            if (returning) {
+                localStorage.removeItem("returnFromAnime");
+
+                // Skip intro animations, instantly set up everything
+                isStarted = true;
+                riverContainer.classList.add("active");
+                boat.style.opacity = "1";
+                boat.classList.add("boat-bob");
+                boatWake.style.opacity = "0.3";
+                boat.style.left = "-15%";
+                boat.style.top = "60%";
+                boatWake.style.left = "-17%";
+                boatWake.style.top = "63%";
+                buttonsWrap.classList.add("visible");
+                musicControls.classList.add("visible");
+                collageWrap.classList.add("show");
+                bgMusic.volume = parseFloat(volumeControl.value || 0.1);
+                bgMusic.play().catch(() => { });
+                populateCollage();
+
+                // Skip directly to Anime Lagoon
+                currentIndex = 5; 
+                const destEl = destinations[currentIndex];
+                for (let i = 0; i <= currentIndex; i++) {
+                    destinations[i].classList.add("unlocked");
+                }
+                await moveBoatToDestination(destEl);
+                fadeMessage("Welcome back to Anime Lagoon 🌊");
+                openGiftBtn.style.display = "inline-block";
+                openGiftBtn.onclick = () => location.href = 'AnimeList.html';
+            }
+        });
     </script>
 
 </body>
